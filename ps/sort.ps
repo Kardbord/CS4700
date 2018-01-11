@@ -8,10 +8,20 @@
 /sort {
     1 dict begin % set up local dictionary
 
-    % for (i = 0; i < stack_size; ++i)
-    0 1 count {
+    /stack_size count 1 sub def % stack_size = number of items to be sorted
 
-    } for
+    /stop_at 0 def
+    % for (i = 0; i < stack_size; ++i)
+    stack_size {
+        /index stack_size def
+
+        % if (stack.top - 1 < stack.top) swap
+        gt {
+            exch % swap top two stack items
+        } if
+        
+        /stop_at stop_at 1 add def % ++stop_at
+    } repeat 
 
     end % remove local dictionary
 } def
