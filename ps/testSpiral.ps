@@ -1,0 +1,22 @@
+(spiral.ps) run
+
+/Times-Roman findfont        % Find the font 
+14 scalefont                 % Make it a bigger font
+setfont                      % Now load the font as the current font
+
+/print-top {                
+   5 string                 % Create a string of length 10 on the operand stack
+   cvs                       % Convert the top value of the stack to the string
+   show
+} def                        
+
+% move coordinates
+100 600 translate
+0 0 moveto
+
+% test code
+%(Testing spiral 10) show
+0 0 100 20 360 200 div 200 spiral
+0 -200 translate
+0 0 100 40 360 6 div 6 spiral
+showpage

@@ -1,0 +1,58 @@
+% Be sure to DOCUMENT the operator especially inputs
+% and outputs.
+/spiral {
+
+} def
+
+% The operator draws a figure eight at the coordinates 0, 0
+% It takes as input
+%   radius - the radius (length) of the figure 8
+%   width - the width of the figure 8
+/figureEight {
+  2 dict begin
+    /width exch def   % width
+    /radius exch def   % radius
+
+    % Start a path for the object
+    newpath
+
+    % Move to the center
+    0 0 moveto 
+
+    % Draw one loop using a Bezier curve
+    0 0 radius width radius width -1 mul 0 0 curveto 
+
+    % Draw the other side of the loop using a Bezier curve
+    0 0 radius -1 mul width radius -1 mul width -1 mul 0 0 curveto 
+    closepath 
+
+    % Draw it
+    stroke
+  end    
+} def
+
+% The oval operator draws an oval centered at the coordinates 0, 0
+% It takes as input
+%   radius - radius (length) of the oval
+%   width - width of the oval
+/oval {
+  2 dict begin
+    /width exch def   % width
+    /radius exch def   % radius
+
+    % Move to the start of half of the oval
+    0 width moveto 
+
+    % Draw half the oval
+    0 width radius width radius width -1 mul 0 width -1 mul curveto 
+    
+    % Move to the other side of the oval
+    0 width moveto 
+
+    % Draw the other half 
+    0 width radius -1 mul width radius -1 mul width -1 mul 0 width -1 mul curveto 
+   
+    % Actually, now draw it
+    stroke
+  end    
+} def
