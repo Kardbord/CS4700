@@ -15,7 +15,7 @@
     stack_size {
         /index stack_size def
 
-        % if (stack.top - 1 < stack.top) swap
+        % if (stack.top - 1 > stack.top) swap
         gt {
             exch % swap top two stack items
         } if
