@@ -33,10 +33,12 @@
     end
 } def
 
+% param: number of times to call min
+% calls min @param times
 /find_smallest {
-    1 dict begin
 
-    
+    % last item on the stack should be number of times to repeat
+    { min } repeat
 
     end
 } def
