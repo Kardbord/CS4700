@@ -70,22 +70,27 @@
 /sort {
     1 dict begin % set up local dictionary
 
-    /stack_size count 1 sub def % size of the stack to be sorted
+    count 1 eq
+        {}
+        {
 
-    dup_stack % duplicate the entire stack
+            /stack_size count 1 sub def % size of the stack to be sorted
 
-    stack_size 1 sub find_largest % iterate through duplicated stack to find the largest number present
-                                  % leaves the largest number on the stack
+            dup_stack % duplicate the entire stack
 
-    /largest exch def
+            stack_size 1 sub find_largest % iterate through duplicated stack to find the largest number present
+                                           % leaves the largest number on the stack
 
-    largest % push largest back onto the stack for rm_largest
+            /largest exch def
 
-    rm_largest
+            largest % push largest back onto the stack for rm_largest
 
-    sort % recurse
+            rm_largest
 
-    largest % push largest back onto the stack
+            sort % recurse
+
+            largest % push largest back onto the stack
+        } ifelse
 
     end % remove local dictionary
 } def
