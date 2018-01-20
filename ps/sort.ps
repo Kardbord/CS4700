@@ -18,23 +18,33 @@
     end
 } def
 
+% function that calculates the minimum of the top two numbers on the stack
+% and pushes that min onto the stack
+/min {
+    1 dict begin
+
+    /y exch def
+    /x exch def
+
+    x y lt
+        {x}
+        {y}
+    ifelse
+    end
+} def
+
+/find_smallest {
+    1 dict begin
+
+    
+
+    end
+} def
+
 /sort {
     1 dict begin % set up local dictionary
 
-    /stack_size count 1 sub def % stack_size = number of items to be sorted
-
-    /stop_at 0 def
-    % for (i = 0; i < stack_size; ++i)
-    stack_size {
-        /index stack_size def
-
-        % if (stack.top - 1 > stack.top) swap
-        gt {
-            exch % swap top two stack items
-        } if
-        
-        /stop_at stop_at 1 add def % ++stop_at
-    } repeat 
+    
 
     end % remove local dictionary
 } def
