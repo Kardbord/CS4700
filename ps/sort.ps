@@ -5,6 +5,19 @@
 % Homework 1        %
 %%%%%%%%%%%%%%%%%%%%%
 
+% function to duplicate entire stack
+/dup_stack {
+    1 dict begin
+
+    /n count 1 sub 1 sub def
+
+    count {
+        n index
+    } repeat
+
+    end
+} def
+
 /sort {
     1 dict begin % set up local dictionary
 
@@ -25,3 +38,5 @@
 
     end % remove local dictionary
 } def
+
+
