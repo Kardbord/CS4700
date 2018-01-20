@@ -18,27 +18,51 @@
     end
 } def
 
-% function that calculates the minimum of the top two numbers on the stack
-% and pushes that min onto the stack
-/min {
+% function that calculates the maximum of the top two numbers on the stack
+% and pushes that max onto the stack
+/max {
     1 dict begin
 
     /y exch def
     /x exch def
 
-    x y lt
+    x y gt
         {x}
         {y}
     ifelse
     end
 } def
 
-% param: number of times to call min
+% param: number of times to call max 
 % calls min @param times
-/find_smallest {
+/find_largest {
 
     % last item on the stack should be number of times to repeat
-    { min } repeat
+    { max } repeat
+
+} def
+
+% param: largest number in the stack
+% given the largest number present in the stack, searches the stack and removes that number
+/rm_largest {
+    1 dict begin
+
+    /largest exch def
+    /x exch def
+
+    largest x eq
+        {
+             % if we found and removed the largest during the comparison, do nothing, we're done
+        }
+
+        {
+            % if we didn't find the largest...
+            x % push the last compared item back onto the stack
+            count 1 roll % roll the top of the stack to the bottom for next compare
+            largest % push largest back onto the stack
+            rm_largest % recurse
+        }
+    ifelse
 
     end
 } def
@@ -46,7 +70,22 @@
 /sort {
     1 dict begin % set up local dictionary
 
-    
+    /stack_size count 1 sub def % size of the stack to be sorted
+
+    dup_stack % duplicate the entire stack
+
+    stack_size 1 sub find_largest % iterate through duplicated stack to find the largest number present
+                                  % leaves the largest number on the stack
+
+    /largest exch def
+
+    largest % push largest back onto the stack for rm_largest
+
+    rm_largest
+
+    sort % recurse
+
+    largest % push largest back onto the stack
 
     end % remove local dictionary
 } def
