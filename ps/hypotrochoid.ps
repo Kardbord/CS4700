@@ -5,8 +5,20 @@
 % Homework 1        %
 %%%%%%%%%%%%%%%%%%%%%
 
-% Be sure to DOCUMENT the operator especially inputs
-% and outputs.
+% Inputs:
+%   a (radius of big circle)
+%   b (radius of small circle)
+%   d (length of arm)
+%   r (number of times around)
 /hypotrochoid {
+    gsave
+    1 dict begin
+    
+    /a exch def % radius of big circle
+    /b exch def % radius of small circle
+    /d exch def % length of arm
+    /r exch def % number of times around
 
+    end
+    grestore
 } def
