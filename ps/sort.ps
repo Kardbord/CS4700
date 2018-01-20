@@ -70,6 +70,7 @@
 /sort {
     1 dict begin % set up local dictionary
 
+    count 0 eq {} {
     count 1 eq
         {}
         {
@@ -91,6 +92,7 @@
 
             largest % push largest back onto the stack
         } ifelse
+    } ifelse
 
     end % remove local dictionary
 } def
