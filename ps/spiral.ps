@@ -62,5 +62,15 @@
 % Be sure to DOCUMENT the operator especially inputs
 % and outputs.
 /spiral {
+  gsave
+  1 dict begin
+    /number exch def  % number of ovals or figure eights to be drawn
+    /angle exch def   % angle by which to rotate each oval or figure eight
+    /width exch def   % width of ovals or figure eights
+    /radius exch def  % radius of ovals or figure eights
+    /y exch def       % y coordinate for center of ovals or figure eights
+    /x exch def       % x coordinate for center of ovals or figure eights
 
+  end
+  grestore
 } def
