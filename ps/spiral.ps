@@ -59,8 +59,14 @@
   end    
 } def
 
-% Be sure to DOCUMENT the operator especially inputs
-% and outputs.
+% Draws a number of spirals alternating in color
+% Takes as input
+%    number - number of ovals or figure eights to be drawn
+%    angle  - angle by which to rotate each oval or figure eight
+%    width  - width of ovals or figure eights
+%    radius - radius of ovals or figure eights
+%    y      - y coordinate for the center of the ovals or figure eights
+%    x      - x coordinate for the center of the ovals or figure eights
 /spiral {
   gsave
   1 dict begin
