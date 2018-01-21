@@ -14,10 +14,43 @@
     gsave
     1 dict begin
     
-    /a exch def % radius of big circle
-    /b exch def % radius of small circle
-    /d exch def % length of arm
     /r exch def % number of times around
+    /d exch def % length of arm
+    /b exch def % radius of small circle
+    /a exch def % radius of big circle
+
+    0 0 moveto
+
+    % loop 360 * r times
+    /t 0 def % counter
+    360 r mul {
+
+        a b sub
+        t cos
+        mul      % at this stage we have (a-b) * cos(t) on the stack
+        a b sub t mul b div cos % add onto the stack cos( ((a-b) * t)/b )
+        d mul
+        add
+        /x exch def % x(t) == ((a-b) * cos(t)) + (d * cos( ((a-b) * t)/b ))
+
+        a b sub
+        t sin
+        mul    % we have (a-b) * sin(t)
+        a b sub t mul b div sin
+        d mul
+        sub
+        /y exch def
+
+        0 t eq
+            { x y moveto }
+            { x y lineto }
+        ifelse
+
+
+        /t t 1 add def % increment counter
+    } repeat
+
+    stroke
 
     end
     grestore
