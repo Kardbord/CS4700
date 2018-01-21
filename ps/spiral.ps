@@ -71,6 +71,30 @@
     /y exch def       % y coordinate for center of ovals or figure eights
     /x exch def       % x coordinate for center of ovals or figure eights
 
+    x y translate     % set the new origin
+
+    /counter 0 def    % counter for cycling colors -- 0:red, 1:blue, 2:green
+
+    number {
+
+        % set appropriate color
+        counter 2 lt 
+            { 
+              counter 1 lt 
+                { 255 0 0 setrgbcolor /counter counter 1 add def } 
+                { 0 0 255 setrgbcolor /counter counter 1 add def } 
+            ifelse 
+            }
+            { 0 255 0 setrgbcolor /counter 0 def }
+        ifelse            
+
+        radius width oval % draw oval
+
+        angle rotate      % rotate for next oval
+
+    } repeat
+
+
   end
   grestore
 } def
