@@ -10,41 +10,49 @@
 /fractal { 
     gsave
     1 dict begin
-    /num exch def % number of times to recurse
 
-    num 0 gt 
-        { 
-           triangle
-           gsave
-           200 200 translate
-           32 rotate
-           0.5 0.5 scale
-           num 1 sub fractal
-           grestore
-           -200 200 translate
-           -32 rotate
-           num 1 sub fractal
-        }
-    if
+    count 0 gt {
+
+        /num exch def % number of times to recurse
+
+        num 0 gt {
+
+          square 
+          gsave
+          -50 -50 translate % translate left to prepare to draw left fractal
+          0.5 0.5 scale     % halve the scale
+          num 1 sub fractal % draw the left fractal and its children (if any)
+          grestore          % recenter in original square
+
+          gsave
+          25 -50 translate % translate right to prepare to draw right fractal
+          0.5 0.5 scale
+          num 1 sub fractal
+          grestore
+        } if
+    } if
 
     end
     grestore
 } def
 
 
-% draws a triangle. Takes no input
-/triangle {
+% draws a square. Takes no input
+/square {
     1 dict begin
 
     0 0 moveto
 
-    200 200 lineto 
-    120 160 lineto 
-    0 0 lineto fill
+    0 50 lineto
+    50 50 lineto 
+    50 0 lineto 
+    0 0 lineto %fill
+
+    25 25 translate % recenter in center of rectangle
 
     stroke
 
-    end
+    end 
 } def
 
 
