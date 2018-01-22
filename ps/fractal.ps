@@ -19,16 +19,14 @@
 
           square 
           gsave
-          -50 -50 translate % translate left to prepare to draw left fractal
-          0.5 0.5 scale     % halve the scale
-          num 1 sub fractal % draw the left fractal and its children (if any)
-          grestore          % recenter in original square
+          -50 -50 translate  % translate left to prepare to draw left fractal
+          0.5 0.5 scale      % halve the scale
+          num 1 sub fractal  % draw the left fractal and its children (if any)
+          grestore           % recenter in original square
 
-          gsave
-          25 -50 translate % translate right to prepare to draw right fractal
-          0.5 0.5 scale
-          num 1 sub fractal
-          grestore
+          25 -50 translate   % translate right to prepare to draw right fractal
+          0.5 0.5 scale      % halve the scale
+          num 1 sub fractal  % draw the right fractal and its children (if any)
         } if
     } if
 
@@ -37,18 +35,18 @@
 } def
 
 
-% draws a square. Takes no input
+% Draws a square. Takes no input
 /square {
     1 dict begin
 
     0 0 moveto
 
-    0 50 lineto
-    50 50 lineto 
-    50 0 lineto 
-    0 0 lineto %fill
+    0 50 lineto      % draw left side of square
+    50 50 lineto     % draw top of square
+    50 0 lineto      % draw right side of square
+    0 0 lineto fill  % draw bottom of square
 
-    25 25 translate % recenter in center of rectangle
+    25 25 translate  % recenter in center of square for easy calculations in 'fractal' operator
 
     stroke
 
