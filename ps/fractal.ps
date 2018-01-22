@@ -8,5 +8,43 @@
 % Be sure to DOCUMENT the operator especially inputs
 % and outputs.
 /fractal { 
+    gsave
+    1 dict begin
+    /num exch def % number of times to recurse
 
+    num 0 gt 
+        { 
+           triangle
+           gsave
+           200 200 translate
+           32 rotate
+           0.5 0.5 scale
+           num 1 sub fractal
+           grestore
+           -200 200 translate
+           -32 rotate
+           num 1 sub fractal
+        }
+    if
+
+    end
+    grestore
 } def
+
+
+% draws a triangle. Takes no input
+/triangle {
+    1 dict begin
+
+    0 0 moveto
+
+    200 200 lineto 
+    120 160 lineto 
+    0 0 lineto fill
+
+    stroke
+
+    end
+} def
+
+
