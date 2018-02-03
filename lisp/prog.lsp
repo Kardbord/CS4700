@@ -6,12 +6,22 @@
 ))
 
 (define (mergesort lst i k) (
+    (if (= i k) () (
+        (mergesort lst i (mid i k))
+        (mergesort lst (+ (mid i k) 1) k)
+        (_merge lst i (mid i k) k)
+    ))
+))
+
+(define (_merge lst i mid k) (
     
 ))
 
-(define (_merge lst, i, mid, k) (
-
+# calculate midpoint between i && k
+(define (mid i k) (
+    (/ (+ i k) 2)
 ))
+
 
 # ------------------- sort-functions && helpers -------------------------- #
 
