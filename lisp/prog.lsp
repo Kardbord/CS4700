@@ -6,7 +6,7 @@
 ))
 
 (define (mergesort lst i k) (
-    (if (= i k) () (
+    (if (!= i k) (
         (mergesort lst i (mid i k))
         (mergesort lst (+ (mid i k) 1) k)
         (_merge lst i (mid i k) k)
