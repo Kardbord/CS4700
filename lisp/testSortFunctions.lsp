@@ -1,0 +1,21 @@
+(load "prog.lsp") ; Note you need to put in the path to where prog.lsp lives
+
+(define (foo1 x) (if (< x 100) 0 x))
+(define (foo2 x) (if (< x 50) 0 x))
+(define (foo3 x) (if (< x 25) 0 x))
+(define (add1 x) (+ x 1))
+(define (add2 x) (+ x 2))
+(define (add3 x) (+ x 3))
+(define (add4 x) (+ x 4))
+
+(println "Testing (sort-functions (list foo2 foo1 foo3))")
+(println (sort-functions (list foo2 foo1 foo3)))
+(println "")
+(println "Testing (sort-functions (list add4 add2 add1 add3))")
+(println (sort-functions (list add4 add2 add1 add3)))
+(println "")
+(println "Testing (sort-functions (list add4))")
+(println (sort-functions (list add4)))
+(println "")
+(println "Testing (sort-functions '())")
+(println (sort-functions '()))
