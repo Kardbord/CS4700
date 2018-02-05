@@ -1,24 +1,27 @@
 # ------------------- sort-list && helpers ------------------------------- #
 
 
-(define (sort-list lst) (
-    (mergesort lst)
+(define (sort-list _list) (begin
+    (mergesort _list)
 ))
 
-(define (mergesort lst i k) (
+(define (mergesort _list i k) (begin
     (if (!= i k) ((begin
-        (mergesort lst i (mid i k))
-        (mergesort lst (+ (mid i k) 1) k)
-        (_merge lst i (mid i k) k)
+        (mergesort _list i (mid i k))
+        (mergesort _list (+ (mid i k) 1) k)
+        (_merge _list i (mid i k) k)
     )))
 ))
 
-(define (_merge lst i mid k) (
-    
+(define (_merge _list i mid k) (begin
+    (define _list2 '())
+    (for (a i mid) (begin
+                     
+    ))
 ))
 
 # calculate midpoint between i && k
-(define (mid i k) (
+(define (mid i k) (begin
     (/ (+ i k) 2)
 ))
 
@@ -26,13 +29,13 @@
 # ------------------- sort-functions && helpers -------------------------- #
 
 
-(define (sort-functions lst) true)
+(define (sort-functions _list) true)
 
 
 # ------------------- compose-list && helpers ---------------------------- #
 
 
-(define (compose-list lst) true)
+(define (compose-list _list) true)
 
 
 # ------------------- squares && helpers --------------------------------- #
