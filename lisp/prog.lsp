@@ -21,7 +21,7 @@
             # divide into sublists
 
             # _first sublist
-            (for (i 0 (/ (length _list) 2)) 
+            (for (i 1 (/ (length _list) 2)) 
                 (push (pop _list) _sublist1 -1)
             )
             # _second sublist
