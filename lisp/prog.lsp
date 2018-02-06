@@ -13,8 +13,8 @@
 # param _list : a list to be sorted
 # _return     : a sorted list
 (define (mergesort _list , _sublist1 _sublist2) (begin
-    (if (= (length _list) 1) 
-        _list   # _if _list has _length 1, _return it
+    (if (<= (length _list) 1) 
+        _list   # _if _list has _length 1 or 0, _return it
 
         (begin  # else divide into two sub-lists _and recursively mergesort them
 
