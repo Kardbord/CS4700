@@ -1,4 +1,4 @@
-;--------------------------- sort-list && helpers ------------------------------- ;
+;--------------------------- sort-list and helpers ------------------------------- ;
 
 ; sorts @_list
 ;
@@ -64,24 +64,24 @@
     )
 )) 
 
-; ----------------------- sort-functions && helpers ----------------------------- ;
+; ----------------------- sort-functions and helpers ----------------------------- ;
 
 
 (define (sort-functions _list) true)
 
 
-; ------------------------ compose-list && helpers ------------------------------ ;
+; ------------------------ compose-list and helpers ------------------------------ ;
 
 
 (define (compose-list _list) true)
 
 
-; --------------------------- squares && helpers -------------------------------- ;
+; --------------------------- squares and helpers -------------------------------- ;
 
 (define (squares filename n) true)
 
 
-; --------------------------- fractal && helpers -------------------------------- ;
+; --------------------------- fractal and helpers -------------------------------- ;
 
 
 (define (fractal filename dimension) true)
