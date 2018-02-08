@@ -73,10 +73,12 @@
 ; ------------------------ compose-list and helpers ------------------------------ ;
 
 
-(define (compose-list _list) 
-    (if (= (length _list) 2)
-        (compose (pop _list) (pop _list))
-        (compose (pop _list) (compose-list _list))
+(define (compose-list _list)
+    (if 
+        (= (length _list) 2) (compose (pop _list) (pop _list))          ; compose the last two functions
+        (> (length _list) 2) (compose (pop _list) (compose-list _list)) ; recursively compose remaining functions 
+        (= (length _list) 1) (pop _list)                                ; if _list only ever had one function f, return f
+        (empty? _list)       nil                                        ; if _list is empty, return nil
     )
 )
 
