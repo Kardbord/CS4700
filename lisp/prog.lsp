@@ -73,7 +73,17 @@
 ; ------------------------ compose-list and helpers ------------------------------ ;
 
 
-(define (compose-list _list) true)
+(define (compose-list _list) 
+    (if (= (length _list) 2)
+        (compose (pop _list) (pop _list))
+        (compose (pop _list) (compose-list _list))
+    )
+)
+
+; composes two functions together, this function is courtesy of Dr. Dyreson
+(define (compose f g)
+    (expand (lambda (x) (f (g x))) 'f 'g)
+)
 
 
 ; --------------------------- squares and helpers -------------------------------- ;
