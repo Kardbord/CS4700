@@ -4,9 +4,9 @@
 ;
 ; param _list : a list to be sorted
 ; return      : sorted list
-(define (sort-list _list) (begin
+(define (sort-list _list)
     (mergesort _list)
-))
+)
 
 ; sorts @_list using mergesort
 ;
