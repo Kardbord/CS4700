@@ -3,7 +3,7 @@
 ; sorts @_list
 ;
 ; param _list : a list to be sorted
-; return     : sorted list
+; return      : sorted list
 (define (sort-list _list) (begin
     (mergesort _list)
 ))
