@@ -12,7 +12,7 @@
 ;
 ; param _list : a list to be sorted
 ; return      : a sorted list
-(define (mergesort _list , _sublist1 _sublist2) (begin
+(define (mergesort _list , _sublist1 _sublist2)
     (if (<= (length _list) 1) 
         _list   ; if @_list has length 1 or 0, return it
 
@@ -34,7 +34,7 @@
 
         )
     )
-))
+)
 
 ; merges the two sorted lists @_list1 and @_list2
 ;
