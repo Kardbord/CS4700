@@ -72,7 +72,10 @@
 
 ; ------------------------ compose-list and helpers ------------------------------ ;
 
-
+; composes a list of 1-parameter functions into a single function
+;
+; param _list : a list of single-parameter functions to be composed into one function
+; return      : a function composed of the functions in @_list
 (define (compose-list _list)
     (if 
         (= (length _list) 2) (compose (pop _list) (pop _list))          ; compose the last two functions
@@ -82,7 +85,12 @@
     )
 )
 
-; composes two functions together, this function is courtesy of Dr. Dyreson
+; composes two single-parameter functions together
+; this function is courtesy of Dr. Dyreson
+;
+; param f : a single-parameter function
+; param g : a single-parameter function
+; return  : a function composed of @f and @g
 (define (compose f g)
     (expand (lambda (x) (f (g x))) 'f 'g)
 )
