@@ -67,7 +67,52 @@
 ; ----------------------- sort-functions and helpers ----------------------------- ;
 
 
-(define (sort-functions _list) true)
+(define (sort-functions _list , _sublist1 _sublist2) 
+    (if (<= (length _list) 1) 
+        _list   ; if @_list has length 1 or 0, return it
+
+        (begin  ; else divide into two sub-lists and recursively mergesort them
+
+            ; divide into sublists
+
+            ; first sublist
+            (for (i 1 (/ (length _list) 2)) 
+                (push (pop _list) _sublist1 -1)
+            )
+            ; second sublist
+            (while _list 
+                (push (pop _list) _sublist2 -1)
+            )
+
+            ; recursively sort and then _merge the two sublists
+            (merge-functions (sort-functions _sublist1) (sort-functions _sublist2))
+
+        )
+    )
+)
+
+(define (merge-functions _list1 _list2 , _sortedList) (begin
+
+    ; make sure interpreter knows _sortedList is a list
+    (push 1 _sortedList) (pop _sortedList)
+
+    ; iterate through each list and merge elements appropriately
+    (while (and _list1 _list2) 
+        (if (compare-functions-lt (nth 0 _list1) (nth 0 _list2) 0)
+            (push (pop _list1) _sortedList -1) ; if @_list1[0] < @_list2[0] place @_list1[0] into _sortedList.back
+            (push (pop _list2) _sortedList -1) ; else place @_list2[0] into _sortedList.back
+        )
+    )
+
+    ; one of the lists (but not both) may still contain elements
+    ; place any remaining items into _sortedList
+    ; note that this works since @_list1 _and @_list2 are already sorted
+
+    (if (empty? _list1)
+        (append _sortedList _list2)
+        (append _sortedList _list1)
+    )
+))
 
 ; compares two functions @f and @g using @n
 ; @n should always be 0 in the initial call
@@ -83,7 +128,7 @@
     (if 
        (> (f n) (g n)) nil
        (< (f n) (g n)) true 
-       (= (f n) (g n)) (compare-functions f g (+ n 1))
+       (= (f n) (g n)) (compare-functions-lt f g (+ n 1))
     )
 )
 
