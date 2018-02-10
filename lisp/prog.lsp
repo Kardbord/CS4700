@@ -66,7 +66,10 @@
 
 ; ----------------------- sort-functions and helpers ----------------------------- ;
 
-
+; sorts @_list
+;
+; param _list : a list of single parameter functions to be sorted
+; return      : sorted list
 (define (sort-functions _list , _sublist1 _sublist2) 
     (if (<= (length _list) 1) 
         _list   ; if @_list has length 1 or 0, return it
@@ -91,6 +94,11 @@
     )
 )
 
+; merges the two sorted lists @_list1 and @_list2
+;
+; param _list1 : first sorted list
+; param _list2 : second sorted list
+; return       : a merged sorted list from @_list1 _and @_list2
 (define (merge-functions _list1 _list2 , _sortedList) (begin
 
     ; make sure interpreter knows _sortedList is a list
@@ -114,14 +122,14 @@
     )
 ))
 
-; compares two functions @f and @g using @n
+; compares two single parameter functions @f and @g using @n
 ; @n should always be 0 in the initial call
 ;
 ; a function @f is 'less than' a function @g if and only if there exists some non-negative value n such that:
 ; (f n) < (g n) and for all 0 <= i <= (n - 1) (f i) == (g i)
 ;
-; param f : the first function to be compared
-; param g : the second function to be compared
+; param f : the first single parameter function to be compared
+; param g : the second single parameter function to be compared
 ; param n : the initial 'i' to begin comparing the two functions with
 ; return  : true if @f is less than @g
 (define (compare-functions-lt f g n)
