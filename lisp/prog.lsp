@@ -69,6 +69,24 @@
 
 (define (sort-functions _list) true)
 
+; compares two functions @f and @g using @n
+; @n should always be 0 in the initial call
+;
+; a function @f is 'less than' a function @g if and only if there exists some non-negative value n such that:
+; (f n) < (g n) and for all 0 <= i <= (n - 1) (f i) == (g i)
+;
+; param f : the first function to be compared
+; param g : the second function to be compared
+; param n : the initial 'i' to begin comparing the two functions with
+; return  : true if @f is less than @g
+(define (compare-functions f g n)
+    (if 
+       (> (f n) (g n)) nil
+       (< (f n) (g n)) true 
+       (= (f n) (g n)) (compare-functions f g (+ n 1))
+    )
+)
+
 
 ; ------------------------ compose-list and helpers ------------------------------ ;
 
