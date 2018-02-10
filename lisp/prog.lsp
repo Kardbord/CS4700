@@ -79,7 +79,7 @@
 ; param g : the second function to be compared
 ; param n : the initial 'i' to begin comparing the two functions with
 ; return  : true if @f is less than @g
-(define (compare-functions f g n)
+(define (compare-functions-lt f g n)
     (if 
        (> (f n) (g n)) nil
        (< (f n) (g n)) true 
