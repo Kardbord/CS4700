@@ -171,7 +171,6 @@
 
 (define (squares filename n) (begin
     (module "postscript.lsp")
-
     (ps:translate 100 100)
 
     (for (x 1 n)
@@ -189,7 +188,6 @@
         )
         (ps:translate 30 0)
     )
-
     (ps:render filename)
 ))
 
@@ -199,7 +197,34 @@
 
 (define (fractal filename dimension) (begin
     (module "postscript.lsp")
-    ; TODO: postscript stuff
+    (ps:translate 300 100)
+    (ps:line-width 8)
+    (draw-fractal dimension)
     (ps:render filename)
 ))
+
+(define (draw-fractal dimension) 
+    (if 
+        (= dimension 1) (ps:drawto 0 300)
+
+        (> dimension 1) (begin
+            (ps:drawto 0 300)
+            (ps:translate)
+
+            (ps:gsave)
+            (draw-fractal (- dimension 1))
+            (ps:grestore)
+
+            (ps:gsave)
+            (ps:rotate -45)
+            (draw-fractal (- dimension 1))
+            (ps:grestore)
+
+            (ps:gsave)
+            (ps:rotate 45)
+            (draw-fractal (- dimension 1))
+            (ps:grestore)
+        )
+    )
+)
 

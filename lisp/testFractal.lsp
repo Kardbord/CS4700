@@ -1,4 +1,4 @@
-(define path "path to your .ps or .htm")
+(define path "test.ps")
 (load "prog.lsp") ; Note you need to put in the path to where prog.lsp lives
 
 ; Uncomment the follwing if you want to test like this
