@@ -169,11 +169,17 @@
 
 ; --------------------------- squares and helpers -------------------------------- ;
 
-(define (squares filename n) true)
+(define (squares filename n) (begin
+    ; TODO: postscript stuff
+    (ps:render filename)
+))
 
 
 ; --------------------------- fractal and helpers -------------------------------- ;
 
 
-(define (fractal filename dimension) true)
+(define (fractal filename dimension) (begin
+    ; TODO: postscript stuff
+    (ps:render filename)
+))
 
