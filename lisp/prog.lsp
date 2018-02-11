@@ -173,12 +173,15 @@
     (module "postscript.lsp")
 
     (ps:fill-color 0 0 0)       ; set fill to black
-    (ps:fill-color 0.5 0.5 0.5) ; set fill to grey
     (ps:line-color 0 0 0)       ; set line color to black
+    (ps:translate 100 100)
+    (ps:rectangle 50 50 true)   ; draw a rectangle with width=50 height=50 fill=true
+    (ps:goto 50 0)
+    (ps:fill-color 0.5 0.5 0.5) ; set fill to grey
     (ps:line-color 0.5 0.5 0.5) ; set line color to grey
-    (ps:translate 250 250)      ; translate origin
-
-    (ps:rectangle 50 50 true)   ; draw rectangle with width=50 height=50 fill=true
+    (ps:rectangle 50 50 true)
+    (ps:fill-color 0 0 0)       ; set fill to black
+    (ps:line-color 0 0 0)       ; set line color to black
 
     (ps:render filename)        ; save the generated ps to @filename
 ))
@@ -188,8 +191,8 @@
 
 
 (define (fractal filename dimension) (begin
-    ; TODO: postscript stuff
     (module "postscript.lsp")
+    ; TODO: postscript stuff
     (ps:render filename)
 ))
 
