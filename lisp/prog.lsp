@@ -170,8 +170,13 @@
 ; --------------------------- squares and helpers -------------------------------- ;
 
 (define (squares filename n) (begin
-    ; TODO: postscript stuff
-    (ps:render filename)
+    (module "postscript.lsp")
+
+    (ps:translate 250 250)    ; translate origin
+
+    (ps:rectangle 50 50 true) ; draw rectangle with width=50 height=50 fill=true
+
+    (ps:render filename)      ; save the generated ps to @filename
 ))
 
 
@@ -180,6 +185,7 @@
 
 (define (fractal filename dimension) (begin
     ; TODO: postscript stuff
+    (module "postscript.lsp")
     (ps:render filename)
 ))
 
