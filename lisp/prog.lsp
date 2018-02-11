@@ -205,23 +205,25 @@
 
 (define (draw-fractal dimension) 
     (if 
-        (= dimension 1) (ps:drawto 0 300)
+        (= dimension 1) (ps:draw 200)
 
         (> dimension 1) (begin
-            (ps:drawto 0 300)
+            (ps:draw 200)
             (ps:translate)
+            (ps:goto 0 0)
+            (ps:scale 0.5 0.5)
 
             (ps:gsave)
             (draw-fractal (- dimension 1))
             (ps:grestore)
 
             (ps:gsave)
-            (ps:rotate -45)
+            (ps:turn -45)
             (draw-fractal (- dimension 1))
             (ps:grestore)
 
             (ps:gsave)
-            (ps:rotate 45)
+            (ps:turn 45)
             (draw-fractal (- dimension 1))
             (ps:grestore)
         )
