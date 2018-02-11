@@ -172,11 +172,15 @@
 (define (squares filename n) (begin
     (module "postscript.lsp")
 
-    (ps:translate 250 250)    ; translate origin
+    (ps:fill-color 0 0 0)       ; set fill to black
+    (ps:fill-color 0.5 0.5 0.5) ; set fill to grey
+    (ps:line-color 0 0 0)       ; set line color to black
+    (ps:line-color 0.5 0.5 0.5) ; set line color to grey
+    (ps:translate 250 250)      ; translate origin
 
-    (ps:rectangle 50 50 true) ; draw rectangle with width=50 height=50 fill=true
+    (ps:rectangle 50 50 true)   ; draw rectangle with width=50 height=50 fill=true
 
-    (ps:render filename)      ; save the generated ps to @filename
+    (ps:render filename)        ; save the generated ps to @filename
 ))
 
 
