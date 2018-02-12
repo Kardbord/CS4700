@@ -169,26 +169,32 @@
 
 ; --------------------------- squares and helpers -------------------------------- ;
 
+; writes the PostScript code to draw @n alternating black and grey squares in a line 
+; renders that PostScript code to @filename
+; 
+; param filename : the file to which the PostScript code will be saved and rendered
+; param n        : the number of squares to draw
+; return         : the ending position of the turtle
 (define (squares filename n) (begin
-    (module "postscript.lsp")
-    (ps:translate 100 100)
+    (module "postscript.lsp") ; load postscript module
+    (ps:translate 100 100)    ; translate turtle so as to not draw at the bottom of the page
 
-    (for (x 1 n)
+    (for (x 1 n)              ; draw n squares
         (if (= (mod x 2) 0)
-            (begin
+            (begin ; draw a grey square
               (ps:fill-color 0.5 0.5 0.5)
               (ps:line-color 0.5 0.5 0.5)
               (ps:rectangle 30 30 true)
             )
-            (begin
+            (begin ; else draw a black square
               (ps:fill-color 0 0 0)
               (ps:line-color 0 0 0)
               (ps:rectangle 30 30 true)
             )
         )
-        (ps:translate 30 0)
+        (ps:translate 30 0) ; position the turtle to draw the next square
     )
-    (ps:render filename)
+    (ps:render filename)    ; render the PostScript to @filename
 ))
 
 
