@@ -169,7 +169,7 @@
 
 ; --------------------------- squares and helpers -------------------------------- ;
 
-; writes the PostScript code to draw @n alternating black and grey squares in a line 
+; writes PostScript code to draw @n alternating black and grey squares in a line 
 ; renders that PostScript code to @filename
 ; 
 ; param filename : the file to which the PostScript code will be saved and rendered
@@ -200,34 +200,46 @@
 
 ; --------------------------- fractal and helpers -------------------------------- ;
 
-
+; writes PostScript to draw a tree-like fractal of @dimension and renders that PostScript to @filename
+;
+; param filename  : the file to which the PostScript code will be saved and rendered
+; param dimension : the dimension of the fractal; i.e. how many times to recurse
+; return          : the position of the turtle
 (define (fractal filename dimension) (begin
-    (module "postscript.lsp")
-    (ps:translate 300 100)
-    (ps:line-width 8)
-    (draw-fractal dimension)
-    (ps:render filename)
+    (module "postscript.lsp") ; load PostScript module
+    (ps:translate 300 100)    ; translate origin and move turtle to roughly bottom center of page
+    (ps:line-width 8)         ; set line-width to 8 pts
+    (draw-fractal dimension)  ; begin fractal recursion
+    (ps:render filename)      ; render PostScript code to @filename
 ))
 
+; helper function to (fractal) function
+; draws a tree-like fractal by drawing a line and recursing @dimension times
+;
+; param dimension : the number of times to recurse and draw the fractal
 (define (draw-fractal dimension) 
     (if 
-        (= dimension 1) (ps:draw 200)
+        (= dimension 1) (ps:draw 200) ; base case
 
         (> dimension 1) (begin
+            ; draw base of tree
             (ps:draw 200)
             (ps:translate)
-            (ps:goto 0 0)
+            (ps:goto 0 0) ; not sure why this is necessary, but it is
             (ps:scale 0.5 0.5)
 
+            ; recursively draw top branch of tree
             (ps:gsave)
-            (draw-fractal (- dimension 1))
+            (draw-fractal (- dimension 1)) ;
             (ps:grestore)
 
+            ; recursively draw left branch of tree
             (ps:gsave)
             (ps:turn -45)
             (draw-fractal (- dimension 1))
             (ps:grestore)
 
+            ; recursively draw right branch of tree
             (ps:gsave)
             (ps:turn 45)
             (draw-fractal (- dimension 1))
