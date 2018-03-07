@@ -6,3 +6,6 @@ module Lists where
 
     -- TODO: document countingNumbers
     countingNumbers = [1..]
+
+    -- TODO: document evenNumbers
+    evenNumbers = [x * 2 | x <- countingNumbers]
