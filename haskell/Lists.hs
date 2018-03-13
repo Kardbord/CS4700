@@ -11,3 +11,7 @@ countingNumbers = [1..]
 -- Provides an infinite list of even numbers beginning at 2
 evenNumbers :: [Integer]
 evenNumbers = [x * 2 | x <- countingNumbers]
+
+-- TODO: document merge
+merge :: [Integer] -> [Integer] -> [Integer]
+merge xs1 xs2 = 
