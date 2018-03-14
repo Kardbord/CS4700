@@ -17,7 +17,7 @@ evenNumbers = [x * 2 | x <- countingNumbers]
 -- Primes are computed using Wilson's Theorem
 -- https://en.wikipedia.org/wiki/Wilson%27s_theorem#Example
 primeNumbers :: [Integer]
-primeNumbers = [x | x <- (tail countingNumbers), ((product [1..x-1] + 1) `mod` x == 0)]
+primeNumbers = [x | x <- [2..], ((product [1..x-1] + 1) `mod` x == 0)]
 
 -- Merges two lists of Integers together
 -- Assumes the two lists are already sorted
