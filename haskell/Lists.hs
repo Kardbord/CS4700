@@ -12,6 +12,12 @@ countingNumbers = [1..]
 evenNumbers :: [Integer]
 evenNumbers = [x * 2 | x <- countingNumbers]
 
--- TODO: document merge
+-- Merges two lists of Integers together
+-- Assumes the two lists are already sorted
 merge :: [Integer] -> [Integer] -> [Integer]
+merge xs1 [] = xs1
+merge [] xs2 = xs2
 merge xs1 xs2 = 
+    if head xs1 <= head xs2
+        then (head xs1) : (merge (tail xs1) xs2)
+        else (head xs2) : (merge (tail xs2) xs1)
