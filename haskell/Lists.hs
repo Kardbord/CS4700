@@ -39,3 +39,9 @@ merge xs1 xs2 =
         then (head xs1) : (merge (tail xs1) xs2)
         else (head xs2) : (merge (tail xs2) xs1)
 
+-- TODO: document wrap
+wrap :: Int -> [a] -> [a]
+wrap k [] = []
+wrap 0 xs = xs
+wrap 1 xs = (tail xs) ++ [(head xs)]
+wrap k xs | k > 0 = wrap (k - 1) ((tail xs) ++ [(head xs)])
