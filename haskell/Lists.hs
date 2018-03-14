@@ -1,5 +1,6 @@
 module Lists where
 
+-- TODO: delete this
 -- I've left this sample definition in here, you should delete it
 oddNumbers :: Int -> [Int]
 oddNumbers n = [ x | x <- [1..n], (mod x 1) == 0] 
@@ -11,6 +12,12 @@ countingNumbers = [1..]
 -- Provides an infinite list of even numbers beginning at 2
 evenNumbers :: [Integer]
 evenNumbers = [x * 2 | x <- countingNumbers]
+
+-- Provides an infinite list of prime numbers
+-- Primes are computed using Wilson's Theorem
+-- https://en.wikipedia.org/wiki/Wilson%27s_theorem#Example
+primeNumbers :: [Integer]
+primeNumbers = [x | x <- (tail countingNumbers), ((product [1..x-1] + 1) `mod` x == 0)]
 
 -- Merges two lists of Integers together
 -- Assumes the two lists are already sorted
