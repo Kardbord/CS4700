@@ -53,3 +53,19 @@ wrap 0 xs = xs
 wrap 1 xs = (tail xs) ++ [(head xs)]
 wrap k xs | k > 0 = wrap (k - 1) ((tail xs) ++ [(head xs)])
 wrap k xs | k < 0 = wrap ((length xs) + k) xs
+
+-- Returns a sublist of @xs
+-- Note that indexing begins at 1 for obtaining a sublist
+-- E.g., to get the first through third element of xs, call 'slice (1, 3) xs'
+-- 
+-- param a  :
+-- param b  :
+-- param xs :
+-- return   : the sublist from the @a-th element of xs to the @b-th element of xs
+slice :: (Int, Int) -> [a] -> [a]
+slice (a, b) [] = []
+slice (a, b) xs | (a < 1 || b < 1) = []
+slice (a, b) xs | a > b = []
+slice (a, b) xs | b > (length xs) = slice (a, (length xs)) xs
+slice (a, b) xs | (a == b) = [(xs !! (a - 1))]
+slice (a, b) xs | a >= 1, b > 1 = [(xs !! (a - 1))] ++ (slice (a + 1, b) xs)
