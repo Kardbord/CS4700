@@ -1,4 +1,5 @@
 module Lists where
+import Data.List
 
 -- TODO: delete this
 -- I've left this sample definition in here, you should delete it
@@ -80,4 +81,21 @@ subLists :: [a] -> [[a]]
 subLists [] = []
 subLists xs = [slice (1, x) xs | x <- [1..(length xs)]]
 
+-- TODO: implement countElements
+-- countElements :: [[a]] -> Int
 
+-- Sorts a list of lists of integers ascending by comparing the sum of each sublist
+-- 
+-- param xs : a list of lists of integers
+-- return   : @xs sorted ascending according to the sum of each element's contents
+sortSubLists :: [[Int]] -> [[Int]]
+sortSubLists [] = []
+sortSubLists xs = 
+    sortBy 
+    (\ys zs -> 
+        case () of
+        _ | (sum ys < sum zs) -> LT 
+          | (sum ys > sum zs) -> GT 
+          | (sum ys == sum zs) -> EQ
+    ) 
+    xs
