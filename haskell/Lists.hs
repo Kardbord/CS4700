@@ -70,6 +70,14 @@ slice (a, b) xs | b > (length xs) = slice (a, (length xs)) xs
 slice (a, b) xs | (a == b) = [(xs !! (a - 1))]
 slice (a, b) xs | a >= 1, b > 1 = [(xs !! (a - 1))] ++ (slice (a + 1, b) xs)
 
+-- Creates a list of sub-lists, where the n-th sub-list is a list of elements
+-- from 1 to n in the original list.
+--
+-- param xs : a list
+-- return   : a list of sub-lists, where the n-th sub-list is a list of elements
+--            from 1 to n in @xs
 subLists :: [a] -> [[a]]
 subLists [] = []
 subLists xs = [slice (1, x) xs | x <- [1..(length xs)]]
+
+
