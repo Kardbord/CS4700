@@ -76,8 +76,13 @@ subLists :: [a] -> [[a]]
 subLists [] = []
 subLists xs = [slice (1, x) xs | x <- [1..(length xs)]]
 
--- TODO: implement countElements
--- countElements :: [[a]] -> Int
+-- Counts the total number of elements in a list of lists
+--
+-- param xs : a list of lists
+-- return   : the total number of elements in the sublists of @xs
+countElements :: [[a]] -> Int
+countElements [] = 0
+countElements xs = sum [length x | x <- xs]
 
 -- Sorts a list of lists of integers ascending by comparing the sum of each sublist
 -- 
