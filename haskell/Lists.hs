@@ -18,7 +18,7 @@ evenNumbers = [x * 2 | x <- countingNumbers]
 -- https://en.wikipedia.org/wiki/Wilson%27s_theorem#Example
 --
 -- return : an unbounded list of prime numbers
-primeNumbers :: [Int]
+primeNumbers :: [Integer]
 primeNumbers = [x | x <- [2..], ((product [1..x-1] + 1) `mod` x == 0)]
 
 -- Merges two lists of Integers together.
