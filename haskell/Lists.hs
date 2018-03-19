@@ -131,7 +131,10 @@ listApply :: (a -> a -> a) -> [[a]] -> [a]
 listApply f [] = []
 listApply f xs = [listApply1 f x | x <- xs]
 
--- TODO: document composeList
+-- Composes a list of unary functions into one function
+-- 
+-- param xs : a list of unary functions
+-- return   : a function composed from @xs
 composeList :: [(a -> a)] -> (a -> a)
 composeList [] = (\x -> x)
 composeList xs = foldl (.) (head xs) (tail xs)
