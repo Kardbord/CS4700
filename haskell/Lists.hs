@@ -4,13 +4,13 @@ import Data.List
 -- Provides an unbounded list of whole numbers beginning at 1.
 --
 -- return : an unbounded list of positive integers
-countingNumbers :: [Integer]
+countingNumbers :: [Int]
 countingNumbers = [1..]
 
 -- Provides an unbounded list of even numbers beginning at 2.
 --
 -- return : an unbounded list of positive even numbers
-evenNumbers :: [Integer]
+evenNumbers :: [Int]
 evenNumbers = [x * 2 | x <- countingNumbers]
 
 -- Provides an unbounded list of prime numbers.
@@ -18,7 +18,7 @@ evenNumbers = [x * 2 | x <- countingNumbers]
 -- https://en.wikipedia.org/wiki/Wilson%27s_theorem#Example
 --
 -- return : an unbounded list of prime numbers
-primeNumbers :: [Integer]
+primeNumbers :: [Int]
 primeNumbers = [x | x <- [2..], ((product [1..x-1] + 1) `mod` x == 0)]
 
 -- Merges two lists of Integers together.
@@ -27,7 +27,7 @@ primeNumbers = [x | x <- [2..], ((product [1..x-1] + 1) `mod` x == 0)]
 -- param xs1 : a sorted list
 -- param xs2 : a sorted list
 -- return    : @xs1 and @xs2 merged into one sorted list
-merge :: [Integer] -> [Integer] -> [Integer]
+merge :: [Int] -> [Int] -> [Int]
 merge xs1 [] = xs1
 merge [] xs2 = xs2
 merge xs1 xs2 = 
@@ -130,3 +130,8 @@ listApply1 f xs = listApply1 f (w ++ [f (v !! 0) (v !! 1)])
 listApply :: (a -> a -> a) -> [[a]] -> [a]
 listApply f [] = []
 listApply f xs = [listApply1 f x | x <- xs]
+
+-- TODO: document composeList
+composeList :: [(a -> a)] -> (a -> a)
+composeList [] = (\x -> x)
+composeList xs = foldl (.) (head xs) (tail xs)
