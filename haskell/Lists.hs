@@ -4,13 +4,13 @@ import Data.List
 -- Provides an unbounded list of whole numbers beginning at 1.
 --
 -- return : an unbounded list of positive integers
-countingNumbers :: [Int]
+countingNumbers :: [Integer]
 countingNumbers = [1..]
 
 -- Provides an unbounded list of even numbers beginning at 2.
 --
 -- return : an unbounded list of positive even numbers
-evenNumbers :: [Int]
+evenNumbers :: [Integer]
 evenNumbers = [x * 2 | x <- countingNumbers]
 
 -- Provides an unbounded list of prime numbers.
@@ -27,7 +27,7 @@ primeNumbers = [x | x <- [2..], ((product [1..x-1] + 1) `mod` x == 0)]
 -- param xs1 : a sorted list
 -- param xs2 : a sorted list
 -- return    : @xs1 and @xs2 merged into one sorted list
-merge :: [Int] -> [Int] -> [Int]
+merge :: (Num a, Ord a) => [a] -> [a] -> [a]
 merge xs1 [] = xs1
 merge [] xs2 = xs2
 merge xs1 xs2 = 
