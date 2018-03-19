@@ -99,3 +99,16 @@ sortSubLists xs =
           | (sum ys == sum zs) -> EQ
     ) 
     xs
+
+-- TODO: documentListApplyHelper
+listApplyHelper :: (a -> a -> a) -> [a] -> a
+listApplyHelper f xs | ((length xs) <= 2) = foldl f (head xs) (tail xs) 
+listApplyHelper f xs = listApplyHelper f (w ++ [f (v !! 0) (v !! 1)])
+    where
+        w = (take ((length xs) - 2) xs) -- all but the last two elements of xs
+        v = (drop ((length xs) - 2) xs) -- the last two elements of xs
+
+-- TODO: document listApply
+listApply :: (a -> a -> a) -> [[a]] -> [a]
+listApply f [] = []
+listApply f xs = [listApplyHelper f x | x <- xs]
