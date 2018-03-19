@@ -100,15 +100,33 @@ sortSubLists xs =
     ) 
     xs
 
--- TODO: documentListApplyHelper
-listApplyHelper :: (a -> a -> a) -> [a] -> a
-listApplyHelper f xs | ((length xs) <= 2) = foldl f (head xs) (tail xs) 
-listApplyHelper f xs = listApplyHelper f (w ++ [f (v !! 0) (v !! 1)])
+-- Applies a binary function to the elements of a list.
+-- Application is similar to foldl and foldr, only... not
+-- 
+-- Examples: 
+--     listApply1 f [x1, x2, x3] = f(x1, f(x2, x3))
+--     listApply1 f [y1, y2] = f(y1, y2)
+--     listApply1 f [w1] = w1 
+--
+-- param f  : a binary function
+-- param xs : a list
+-- return   : the result of the binary function @f applied to the elements of @xs
+--            as shown in the example above
+listApply1 :: (a -> a -> a) -> [a] -> a
+listApply1 f xs | ((length xs) <= 2) = foldl f (head xs) (tail xs) 
+listApply1 f xs = listApply1 f (w ++ [f (v !! 0) (v !! 1)])
     where
         w = (take ((length xs) - 2) xs) -- all but the last two elements of xs
         v = (drop ((length xs) - 2) xs) -- the last two elements of xs
 
--- TODO: document listApply
+-- Applies a binary function each list in a list of list.
+-- 
+-- Example:
+-- listApply f [[x1, x2, x3] [y1, y2], [w1]] = [f(x1, f(x2, x3)), f(y1, y2), w1]
+--
+-- param f  : a binary function
+-- param xs : a list of lists
+-- return   : a list of results
 listApply :: (a -> a -> a) -> [[a]] -> [a]
 listApply f [] = []
-listApply f xs = [listApplyHelper f x | x <- xs]
+listApply f xs = [listApply1 f x | x <- xs]
