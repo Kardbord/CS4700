@@ -88,7 +88,7 @@ countElements xs = sum [length x | x <- xs]
 -- 
 -- param xs : a list of lists of integers
 -- return   : @xs sorted ascending according to the sum of each element's contents
-sortSubLists :: [[Int]] -> [[Int]]
+sortSubLists :: [[Integer]] -> [[Integer]]
 sortSubLists [] = []
 sortSubLists xs = 
     sortBy 
