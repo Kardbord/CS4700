@@ -27,7 +27,7 @@ primeNumbers = [x | x <- [2..], ((product [1..x-1] + 1) `mod` x == 0)]
 -- param xs1 : a sorted list
 -- param xs2 : a sorted list
 -- return    : @xs1 and @xs2 merged into one sorted list
-merge :: [Integer] -> [Integer] -> [Integer]
+merge :: (Num a, Ord a) => [a] -> [a] -> [a]
 merge xs1 [] = xs1
 merge [] xs2 = xs2
 merge xs1 xs2 = 
@@ -88,7 +88,7 @@ countElements xs = sum [length x | x <- xs]
 -- 
 -- param xs : a list of lists of integers
 -- return   : @xs sorted ascending according to the sum of each element's contents
-sortSubLists :: [[Int]] -> [[Int]]
+sortSubLists :: [[Integer]] -> [[Integer]]
 sortSubLists [] = []
 sortSubLists xs = 
     sortBy 
@@ -99,3 +99,42 @@ sortSubLists xs =
           | (sum ys == sum zs) -> EQ
     ) 
     xs
+
+-- Applies a binary function to the elements of a list.
+-- Application is similar to foldl and foldr, only... not
+-- 
+-- Examples: 
+--     listApply1 f [x1, x2, x3] = f(x1, f(x2, x3))
+--     listApply1 f [y1, y2] = f(y1, y2)
+--     listApply1 f [w1] = w1 
+--
+-- param f  : a binary function
+-- param xs : a list
+-- return   : the result of the binary function @f applied to the elements of @xs
+--            as shown in the example above
+listApply1 :: (a -> a -> a) -> [a] -> a
+listApply1 f xs | ((length xs) <= 2) = foldl f (head xs) (tail xs) 
+listApply1 f xs = listApply1 f (w ++ [f (v !! 0) (v !! 1)])
+    where
+        w = (take ((length xs) - 2) xs) -- all but the last two elements of xs
+        v = (drop ((length xs) - 2) xs) -- the last two elements of xs
+
+-- Applies a binary function each list in a list of list.
+-- 
+-- Example:
+-- listApply f [[x1, x2, x3] [y1, y2], [w1]] = [f(x1, f(x2, x3)), f(y1, y2), w1]
+--
+-- param f  : a binary function
+-- param xs : a list of lists
+-- return   : a list of results
+listApply :: (a -> a -> a) -> [[a]] -> [a]
+listApply f [] = []
+listApply f xs = [listApply1 f x | x <- xs]
+
+-- Composes a list of unary functions into one function
+-- 
+-- param xs : a list of unary functions
+-- return   : a function composed from @xs
+composeList :: [(a -> a)] -> (a -> a)
+composeList [] = (\x -> x)
+composeList xs = foldl (.) (head xs) (tail xs)
