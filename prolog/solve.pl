@@ -1,9 +1,14 @@
-% These rules are incomplete, that is there are missing rules, and
-% missing parts to the rules.  They are provided to illustrate
-% the approach.
+% Try a move in the "up" direction, assumes Row and Column are bound.
+tryup(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column - 1.
 
-% Try a move in an "Up" direction, assumes Row and Column are bound.
-try(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column - 1.
+% Try a move in the "down" direction, assumes Row and Column are bound.
+trydown(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column + 1.
+
+% Try a move in the "right" direction, assumes Row and Column are bound.
+tryright(Row, Column, NextRow, NextColumn) :- NextRow is Row + 1, NexColumn is Column.
+
+% Try a move in the "left" direction, assumes Row and Column are bound.
+tryleft(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NexColumn is Column.
 
 % move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) - moves, 
 %   and keep on moving until the GoalRow and GoalColumn coordinates 
