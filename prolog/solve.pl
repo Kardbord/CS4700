@@ -1,14 +1,11 @@
 % Try a move in the "up" direction, assumes Row and Column are bound.
-tryUp(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column - 1.
-
+try(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column - 1.
 % Try a move in the "down" direction, assumes Row and Column are bound.
-tryDown(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column + 1.
-
+try(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column + 1.
 % Try a move in the "right" direction, assumes Row and Column are bound.
-tryRight(Row, Column, NextRow, NextColumn) :- NextRow is Row + 1, NexColumn is Column.
-
+try(Row, Column, NextRow, NextColumn) :- NextRow is Row + 1, NexColumn is Column.
 % Try a move in the "left" direction, assumes Row and Column are bound.
-tryLeft(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NexColumn is Column.
+try(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NexColumn is Column.
 
 % move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) - moves, 
 %   and keep on moving until the GoalRow and GoalColumn coordinates 
