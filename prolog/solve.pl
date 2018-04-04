@@ -28,4 +28,5 @@ printMaze(Maze, List) :- true.
 
 solve(Maze) :- true.
 
+% Prints the contents of a list
 printList([H | T]) :- write(H), write('\n'), printList(T).
