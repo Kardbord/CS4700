@@ -27,3 +27,5 @@ printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, open), write(' ').
 printMaze(Maze, List) :- true.
 
 solve(Maze) :- true.
+
+printList([H | T]) :- write(H), write('\n'), printList(T).
