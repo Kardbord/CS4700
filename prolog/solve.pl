@@ -24,8 +24,9 @@ tryLeft(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NexColumn is Co
 %
 %   Print a barrier.
 printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, barrier), write('x').
+%   Print an open cell.
 printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, open), write(' ').
 
-printMaze(Maze, List) ;- true.
+printMaze(Maze, List) :- true.
 
 solve(Maze) :- true.
