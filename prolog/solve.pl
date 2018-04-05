@@ -6,6 +6,8 @@
 % Dr. Dyreson                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% -------------------------- Movement Rules -------------------------- %
+
 % Try a move in the "up" direction, assumes Row and Column are bound.
 try(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column - 1.
 % Try a move in the "down" direction, assumes Row and Column are bound.
@@ -24,6 +26,11 @@ try(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NextColumn is Colum
 %
 %   Recursive case still needed.
 
+% -------------------------- Printing Rules -------------------------- %
+
+% Prints the contents of a list
+printList([H | T]) :- write(H), write('\n'), printList(T).
+
 % printCell(Maze, List, Row, Column) - helper goal for printMaze, printCell
 %   prints a single cell in the maze.
 %
@@ -36,9 +43,9 @@ printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, open), write(' ').
 printTop(Maze) :- put('+'), mazeSize(small, X, Y), \+ printDashes(Y), put('+').
 printDashes(X) :- dif(X, 0), Y is X - 1, write('-'), printDashes(Y).
 
-printMaze(Maze, [H | T]) :- mazeSize(small, X, Y).
+printMaze(Maze, [H | T]) :- printTop(Maze), /* TODO printRows */, printTop(Maze).
+
+% -------------------------- Solving Rules --------------------------- %
 
 solve(Maze) :- true.
 
-% Prints the contents of a list
-printList([H | T]) :- write(H), write('\n'), printList(T).
