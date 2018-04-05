@@ -1,6 +1,7 @@
 % This file contains some test mazes, you can add your own if you like
 
 % Need to group the size facts or Prolog complains
+% mazeSize(Name, Rows, Columns)
 mazeSize(small, 4, 7).
 mazeSize(nobarrier, 7, 7).
 mazeSize(unsolvable, 4, 4).

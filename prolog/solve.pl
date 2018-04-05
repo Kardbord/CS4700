@@ -1,3 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tanner Kvarfordt               %
+% I have no idea what I'm doing  %
+%                                %
+% CS4700                         %
+% Dr. Dyreson                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Try a move in the "up" direction, assumes Row and Column are bound.
 try(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column - 1.
 % Try a move in the "down" direction, assumes Row and Column are bound.
@@ -24,7 +32,11 @@ printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, barrier), write('x').
 %   Print an open cell.
 printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, open), write(' ').
 
-printMaze(Maze, List) :- true. 
+% Print the top or bottom walls of a Maze
+printTop(Maze) :- put('+'), mazeSize(small, X, Y), \+ printDashes(Y), put('+').
+printDashes(X) :- dif(X, 0), Y is X - 1, write('-'), printDashes(Y).
+
+printMaze(Maze, [H | T]) :- mazeSize(small, X, Y).
 
 solve(Maze) :- true.
 
