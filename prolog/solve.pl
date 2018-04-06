@@ -48,9 +48,22 @@ printRow(Maze, _, Row, Column, Cols) :-
     dif(Cols, 0), printCell(Maze, _, Row, Column), 
     X is Column + 1, Y is Cols - 1, printRow(Maze, _, Row, X, Y).
 % Print a row of a maze
-printRow(Maze, Row, [H | T]) :- mazeSize(Maze, _, Cols), Y is Cols + 2, printRow(Maze, _, Row, 0, Y).
+printRow(Maze, Row, List) :- mazeSize(Maze, _, Cols), Y is Cols + 2, printRow(Maze, _, Row, 0, Y).
 
-printMaze(Maze, [H | T]) :- printTop(Maze), /* TODO printRows ,*/ printTop(Maze).
+% Print the rows of a maze
+printRows(Maze, Rows, StartRow, List) :- 
+    dif(Rows, 0), 
+    \+ printRow(Maze, StartRow, List),
+    put('\n'),
+    Z is Rows - 1, W is StartRow + 1,
+    printRows(Maze, Z, W, List).
+
+% Print a maze
+printMaze(Maze, List) :- 
+    printTop(Maze), put('\n'),
+    mazeSize(Maze, Rows, _),
+    \+ printRows(Maze, Rows, 1, List),
+    printTop(Maze), put('\n').
 
 % -------------------------- Solving Rules --------------------------- %
 
