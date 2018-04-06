@@ -35,24 +35,25 @@ printList([H | T]) :- write(H), write('\n'), printList(T).
 printTop(Maze) :- put('+'), mazeSize(Maze, _, Y), \+ printDashes(Y), put('+').
 printDashes(X) :- dif(X, 0), Y is X - 1, write('-'), printDashes(Y).
 
+% Print a cell with a move in it
+printCell(Maze, [H | _], Row, Column) :- maze(Maze, Row, Column, open), nth0(1, H, Column), nth0(0, H, Row), put('*').
+
 % Print a barrier.
 printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, barrier), write('x').
 
 % Print an open cell.
-printCell(Maze, List, Row, Column) :- maze(Maze, Row, Column, open), write(' ').
+printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, open), write(' ').
 
 % Print an edge
 printCell(Maze, _, _, Column) :- mazeSize(Maze, _, Y), ((Y == Column) ; (Column == 0)), put('|').
 
-% Print a cell with a move in it
-printMove(_, [H | _], Row, Column) :- nth0(1, H, Column), nth0(0, H, Row), put('*').
 
 % Print a row of cells
 % Cols defines the number of columns left to print in the row
 printRow(Maze, List, Row, Column, Cols) :- 
     dif(Cols, 0), 
     printCell(Maze, List, Row, Column),
-    X is Column + 1, Y is Cols - 1, printRow(Maze, _, Row, X, Y).
+    X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y).
 
 % Print a row of a maze
 printRow(Maze, Row, List) :- mazeSize(Maze, _, Cols), Y is Cols + 2, printRow(Maze, List, Row, 0, Y).
