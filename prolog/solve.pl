@@ -54,7 +54,7 @@ printRow(Maze, List, Row, Column, Cols) :-
     dif(Cols, 0), 
     ((printCell(Maze, List, Row, Column)) -> 
     (X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y)) ; 
-    (X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y))). % TODO: pop head from list on this line
+    (X is Column + 1, Y is Cols - 1, removeHead(List, T), printRow(Maze, T, Row, X, Y))).
 
 % Print a row of a maze
 printRow(Maze, Row, List) :- mazeSize(Maze, _, Cols), Y is Cols + 2, printRow(Maze, List, Row, 0, Y).
@@ -78,3 +78,5 @@ printMaze(Maze, List) :-
 
 solve(Maze) :- true.
 
+% ------------------------ Misc Helper Facts ------------------------- %
+removeHead([_ | T], T).
