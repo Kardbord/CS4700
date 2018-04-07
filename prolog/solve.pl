@@ -48,19 +48,22 @@ printCell(Maze, List, Row, Column) :- \+ printMove(Maze, List, Row, Column), maz
 % Cols defines the number of columns left to print in the row
 printRow(Maze, List, Row, Column, Cols) :- 
     dif(Cols, 0), 
-    ((printCell(Maze, List, Row, Column)) -> 
+    filterListNot([Row, _], List, RowMoves),
+    ((printCell(Maze, RowMoves, Row, Column)) -> 
     ( 
-        ((X is Column + 1, Y is Cols - 1, maze(Maze, Row, Column, barrier), filterList([Row, Column], List, T))
+        ((X is Column + 1, Y is Cols - 1, maze(Maze, Row, Column, barrier), filterList([Row, Column], RowMoves, T))
             -> (printRow(Maze, T, Row, X, Y)))
         ;
-        (X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y))) 
+        (X is Column + 1, Y is Cols - 1, printRow(Maze, RowMoves, Row, X, Y))
+    ) 
     ; 
-    (X is Column + 1, Y is Cols - 1, removeHead(List, T), printRow(Maze, T, Row, X, Y))).
+    (X is Column + 1, Y is Cols - 1, removeHead(RowMoves, T), printRow(Maze, T, Row, X, Y))).
 
 % Print a row of a maze
 printRow(Maze, Row, List) :- mazeSize(Maze, _, Cols), printRow(Maze, List, Row, 1, Cols).
 
 % Print the rows of a maze
+% TODO: remove from the List any rows that were in the previous row
 printRows(Maze, Rows, StartRow, List) :- 
     dif(Rows, 0), 
     put('|'),
@@ -87,4 +90,8 @@ removeHead([_ | T], T).
 
 are_identical(X, Y) :- Y == X.
 
+are_notidentical(X, Y) :- Y \= X.
+
 filterList(A, In, Out) :- exclude(are_identical(A), In, Out).
+
+filterListNot(A, In, Out) :- exclude(are_notidentical(A), In, Out).
