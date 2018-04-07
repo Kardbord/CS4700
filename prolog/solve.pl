@@ -52,8 +52,9 @@ printCell(Maze, _, _, Column) :- mazeSize(Maze, _, Y), ((Y == Column) ; (Column 
 % Cols defines the number of columns left to print in the row
 printRow(Maze, List, Row, Column, Cols) :- 
     dif(Cols, 0), 
-    printCell(Maze, List, Row, Column),
-    X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y).
+    ((printCell(Maze, List, Row, Column)) -> 
+    (X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y)) ; 
+    (X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y))). % TODO: pop head from list on this line
 
 % Print a row of a maze
 printRow(Maze, Row, List) :- mazeSize(Maze, _, Cols), Y is Cols + 2, printRow(Maze, List, Row, 0, Y).
