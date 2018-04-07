@@ -36,13 +36,13 @@ printTop(Maze) :- put('+'), mazeSize(Maze, _, Y), \+ printDashes(Y), put('+').
 printDashes(X) :- dif(X, 0), Y is X - 1, write('-'), printDashes(Y).
 
 % Print a cell with a move in it
-printCell(Maze, [H | _], Row, Column) :- maze(Maze, Row, Column, open), nth0(1, H, Column), nth0(0, H, Row), put('*').
+printMove(Maze, [H | _], Row, Column) :- maze(Maze, Row, Column, open), nth0(1, H, Column), nth0(0, H, Row), put('*').
 
 % Print a barrier.
 printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, barrier), write('x').
 
 % Print an open cell.
-printCell(Maze, _, Row, Column) :- maze(Maze, Row, Column, open), write(' ').
+printCell(Maze, List, Row, Column) :- \+ printMove(Maze, List, Row, Column), maze(Maze, Row, Column, open), write(' ').
 
 % Print an edge
 printCell(Maze, _, _, Column) :- mazeSize(Maze, _, Y), ((Y == Column) ; (Column == 0)), put('|').
