@@ -49,7 +49,12 @@ printCell(Maze, List, Row, Column) :- \+ printMove(Maze, List, Row, Column), maz
 printRow(Maze, List, Row, Column, Cols) :- 
     dif(Cols, 0), 
     ((printCell(Maze, List, Row, Column)) -> 
-    (X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y)) ; 
+    ( 
+        ((X is Column + 1, Y is Cols - 1, maze(Maze, Row, Column, barrier), filterList([Row, Column], List, T))
+            -> (printRow(Maze, T, Row, X, Y)))
+        ;
+        (X is Column + 1, Y is Cols - 1, printRow(Maze, List, Row, X, Y))) 
+    ; 
     (X is Column + 1, Y is Cols - 1, removeHead(List, T), printRow(Maze, T, Row, X, Y))).
 
 % Print a row of a maze
@@ -65,7 +70,6 @@ printRows(Maze, Rows, StartRow, List) :-
     printRows(Maze, Z, W, List).
 
 % Print a maze
-% TODO: remove any sublists from List that try to move onto a barrier 
 % TODO: figure out why movelists that contain moves from one row to another don't work past the first row
 printMaze(Maze, List) :- 
     printTop(Maze), put('\n'),
@@ -77,5 +81,10 @@ printMaze(Maze, List) :-
 
 solve(Maze) :- true.
 
-% ------------------------ Misc Helper Facts ------------------------- %
+% ------------------ Misc Helper Facts and Rules --------------------- %
+
 removeHead([_ | T], T).
+
+are_identical(X, Y) :- Y == X.
+
+filterList(A, In, Out) :- exclude(are_identical(A), In, Out).
