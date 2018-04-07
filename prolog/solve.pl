@@ -65,6 +65,8 @@ printRows(Maze, Rows, StartRow, List) :-
     printRows(Maze, Z, W, List).
 
 % Print a maze
+% TODO: remove any sublists from List that try to move onto a barrier 
+% TODO: figure out why movelists that contain moves from one row to another don't work past the first row
 printMaze(Maze, List) :- 
     printTop(Maze), put('\n'),
     mazeSize(Maze, Rows, _),
