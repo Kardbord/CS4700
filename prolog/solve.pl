@@ -26,6 +26,10 @@ try(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NextColumn is Colum
 %
 %   Recursive case still needed.
 
+% -------------------------- Solving Rules --------------------------- %
+
+solve(Maze) :- true.
+
 % -------------------------- Printing Rules -------------------------- %
 
 % Prints the contents of a list
@@ -79,10 +83,6 @@ printMaze(Maze, List) :-
     mazeSize(Maze, Rows, _),
     \+ printRows(Maze, Rows, 1, List),
     printTop(Maze), put('\n').
-
-% -------------------------- Solving Rules --------------------------- %
-
-solve(Maze) :- true.
 
 % ------------------ Misc Helper Facts and Rules --------------------- %
 
