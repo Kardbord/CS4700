@@ -22,9 +22,10 @@ try(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NextColumn is Colum
 %   are reached. List is the list of previous moves (important to check 
 %   that the current move is not one previously made), NewList will be 
 %   bound to the list of successful moves in a solved maze.
-
-%
-%   Recursive case still needed.
+lastMove(_, List, NewList, Row, Column, GoalRow, GoalColumn) :-
+    Row == GoalRow, Column == GoalColumn, NewList is List.
+move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
+    \+ lastMove(Maze, List, NewList, Row, Column, GoalRow, GoalColumn).
 
 % -------------------------- Solving Rules --------------------------- %
 
