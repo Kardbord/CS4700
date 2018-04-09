@@ -28,7 +28,9 @@ try(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NextColumn is Colum
 
 % -------------------------- Solving Rules --------------------------- %
 
-solve(Maze) :- true.
+solve(Maze) :- 
+    mazeSize(Maze, Rows, Cols), move(Maze, [], SolnList, 1, 1, Rows, Cols),
+    printMaze(Maze, SolnList).
 
 % -------------------------- Printing Rules -------------------------- %
 
