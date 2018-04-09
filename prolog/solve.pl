@@ -8,30 +8,45 @@
 
 % -------------------------- Movement Rules -------------------------- %
 
-% Try a move in the "up" direction, assumes Row and Column are bound.
-try(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column - 1.
-% Try a move in the "down" direction, assumes Row and Column are bound.
-try(Row, Column, NextRow, NextColumn) :- NextRow is Row, NextColumn is Column + 1.
-% Try a move in the "right" direction, assumes Row and Column are bound.
-try(Row, Column, NextRow, NextColumn) :- NextRow is Row + 1, NextColumn is Column.
-% Try a move in the "left" direction, assumes Row and Column are bound.
-try(Row, Column, NextRow, NextColumn) :- NextRow is Row - 1, NextColumn is Column.
+move(_, _, _, Row, Column, GoalRow, GoalColumn) :-
+    \+ maze(Maze, Row, Column, open),
+    false.
 
-% move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) - moves, 
-%   and keep on moving until the GoalRow and GoalColumn coordinates 
-%   are reached. List is the list of previous moves (important to check 
-%   that the current move is not one previously made), NewList will be 
-%   bound to the list of successful moves in a solved maze.
-lastMove(_, List, NewList, Row, Column, GoalRow, GoalColumn) :-
-    Row == GoalRow, Column == GoalColumn, NewList is List.
 move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
-    \+ lastMove(Maze, List, NewList, Row, Column, GoalRow, GoalColumn).
+    not(isInList([Row, Column], List)),
+    append(List, [[Row, Column]], Result),
+    Up is Row + 1,
+    move(Maze, Result, NewList, Up, Column, GoalRow, GoalColumn).
+
+move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
+    not(isInList([Row, Column], List)),
+    append(List, [[Row, Column]], Result),
+    Down is Row - 1,
+    move(Maze, Result, NewList, Down, Column, GoalRow, GoalColumn).
+
+move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
+    not(isInList([Row, Column], List)),
+    append(List, [[Row, Column]], Result),
+    Right is Column + 1,
+    move(Maze, Result, NewList, Row, Right, GoalRow, GoalColumn).
+
+move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
+    not(isInList([Row, Column], List)),
+    append(List, [[Row, Column]], Result),
+    Left is Column - 1,
+    move(Maze, Result, NewList, Row, Left, GoalRow, GoalColumn).
+
+move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
+    not(isInList([Row, Column], List)),
+    Row is GoalRow,
+    Column is GoalColumn,
+    append(List, [[Row, Column]], NewList).
 
 % -------------------------- Solving Rules --------------------------- %
 
 solve(Maze) :- 
     mazeSize(Maze, Rows, Cols), move(Maze, [], SolnList, 1, 1, Rows, Cols),
-    printMaze(Maze, SolnList).
+    printList(SolnList), printMaze(Maze, SolnList).
 
 % -------------------------- Printing Rules -------------------------- %
 
@@ -98,3 +113,6 @@ are_notidentical(X, Y) :- Y \= X.
 filterList(A, In, Out) :- exclude(are_identical(A), In, Out).
 
 filterListNot(A, In, Out) :- exclude(are_notidentical(A), In, Out).
+
+isInList(A, [A | _]) :- true.
+isInList(A, [_ | T]) :- isInList(A, T).
