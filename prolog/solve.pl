@@ -7,6 +7,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % -------------------------- Movement Rules -------------------------- %
+
+% Check if the goal has been reached
+% Assumes all input but SolnList is bound.
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
     \+ isInList([Row, Column], List),
@@ -14,6 +17,8 @@ move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :-
     Column is GoalColumn,
     append(List, [[Row, Column]], SolnList).
 
+% Try a move in the 'up' direction
+% Assumes all input but SolnList is bound.
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
     \+ isInList([Row, Column], List),
@@ -21,7 +26,8 @@ move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :-
     Up is Row + 1,
     move(Maze, Result, SolnList, Up, Column, GoalRow, GoalColumn).
 
-
+% Try a move in the 'right' direction
+% Assumes all input but SolnList is bound.
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
     \+ isInList([Row, Column], List),
@@ -29,6 +35,8 @@ move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :-
     Right is Column + 1,
     move(Maze, Result, SolnList, Row, Right, GoalRow, GoalColumn).
 
+% Try a move in the 'down' direction.
+% Assumes all input but SolnList is bound.
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
     \+ isInList([Row, Column], List),
@@ -36,6 +44,8 @@ move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :-
     Down is Row - 1,
     move(Maze, Result, SolnList, Down, Column, GoalRow, GoalColumn).
 
+% Try a move in the 'left' direction.
+% Assumes all input but SolnList is bound.
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
     \+ isInList([Row, Column], List),
@@ -45,6 +55,8 @@ move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :-
 
 % -------------------------- Solving Rules --------------------------- %
 
+% Solve a maze, print the solution list, then print the maze with the solution
+% Assumes Maze is bound.
 solve(Maze) :- 
     mazeSize(Maze, Rows, Cols), move(Maze, [], SolnList, 1, 1, Rows, Cols),
     \+ printList(SolnList), printMaze(Maze, SolnList).
@@ -103,15 +115,24 @@ printMaze(Maze, List) :-
 
 % ------------------ Misc Helper Facts and Rules --------------------- %
 
+% Remove the first element from a list.
+% Assumes [_ | T] is bound.
 removeHead([_ | T], T).
 
+% Check if two items are identical
 are_identical(X, Y) :- Y == X.
 
+% Check if two items are not identical
 are_notidentical(X, Y) :- Y \= X.
 
+% Remove any @A from @In
+% Assumes A and In are bound.
 filterList(A, In, Out) :- exclude(are_identical(A), In, Out).
 
+% Remove anything that isn't @A from @In
+% Assumes A and In are bound.
 filterListNot(A, In, Out) :- exclude(are_notidentical(A), In, Out).
 
+% Check if A is in a list
 isInList(A, [A | _]) :- true.
 isInList(A, [_ | T]) :- isInList(A, T).
