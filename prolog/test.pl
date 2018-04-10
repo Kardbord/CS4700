@@ -7,7 +7,7 @@
 ?- printMaze(small, []).
 
 % Should print the small maze
-?- printList([]).
+%?- printList([]).
 
 % Solve the small maze
-?- solve(small).
+%?- solve(small).

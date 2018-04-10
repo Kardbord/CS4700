@@ -8,45 +8,46 @@
 
 % -------------------------- Movement Rules -------------------------- %
 
-move(_, _, _, Row, Column, GoalRow, GoalColumn) :-
-    \+ maze(Maze, Row, Column, open),
-    false.
-
-move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
-    not(isInList([Row, Column], List)),
+move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
+    maze(Maze, Row, Column, open),
+    \+ isInList([Row, Column], List),
     append(List, [[Row, Column]], Result),
     Up is Row + 1,
-    move(Maze, Result, NewList, Up, Column, GoalRow, GoalColumn).
+    move(Maze, Result, SolnList, Up, Column, GoalRow, GoalColumn).
 
-move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
-    not(isInList([Row, Column], List)),
+move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
+    maze(Maze, Row, Column, open),
+    \+ isInList([Row, Column], List),
     append(List, [[Row, Column]], Result),
     Down is Row - 1,
-    move(Maze, Result, NewList, Down, Column, GoalRow, GoalColumn).
+    move(Maze, Result, SolnList, Down, Column, GoalRow, GoalColumn).
 
-move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
-    not(isInList([Row, Column], List)),
+move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
+    maze(Maze, Row, Column, open),
+    \+ isInList([Row, Column], List),
     append(List, [[Row, Column]], Result),
     Right is Column + 1,
-    move(Maze, Result, NewList, Row, Right, GoalRow, GoalColumn).
+    move(Maze, Result, SolnList, Row, Right, GoalRow, GoalColumn).
 
-move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
-    not(isInList([Row, Column], List)),
+move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
+    maze(Maze, Row, Column, open),
+    \+ isInList([Row, Column], List),
     append(List, [[Row, Column]], Result),
     Left is Column - 1,
-    move(Maze, Result, NewList, Row, Left, GoalRow, GoalColumn).
+    move(Maze, Result, SolnList, Row, Left, GoalRow, GoalColumn).
 
-move(Maze, List, NewList, Row, Column, GoalRow, GoalColumn) :- 
-    not(isInList([Row, Column], List)),
+move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
+    maze(Maze, Row, Column, open),
+    \+ isInList([Row, Column], List),
     Row is GoalRow,
     Column is GoalColumn,
-    append(List, [[Row, Column]], NewList).
+    append(List, [[Row, Column]], SolnList).
 
 % -------------------------- Solving Rules --------------------------- %
 
 solve(Maze) :- 
     mazeSize(Maze, Rows, Cols), move(Maze, [], SolnList, 1, 1, Rows, Cols),
-    printList(SolnList), printMaze(Maze, SolnList).
+    \+ printList(SolnList), printMaze(Maze, SolnList).
 
 % -------------------------- Printing Rules -------------------------- %
 
@@ -85,7 +86,6 @@ printRow(Maze, List, Row, Column, Cols) :-
 printRow(Maze, Row, List) :- mazeSize(Maze, _, Cols), printRow(Maze, List, Row, 1, Cols).
 
 % Print the rows of a maze
-% TODO: remove from the List any rows that were in the previous row
 printRows(Maze, Rows, StartRow, List) :- 
     dif(Rows, 0), 
     put('|'),
@@ -95,7 +95,6 @@ printRows(Maze, Rows, StartRow, List) :-
     printRows(Maze, Z, W, List).
 
 % Print a maze
-% TODO: figure out why movelists that contain moves from one row to another don't work past the first row
 printMaze(Maze, List) :- 
     printTop(Maze), put('\n'),
     mazeSize(Maze, Rows, _),
