@@ -6,6 +6,7 @@ mazeSize(small, 4, 7).
 mazeSize(nobarrier, 7, 7).
 mazeSize(unsolvable, 4, 4).
 mazeSize(unknown, 4, 5).
+mazeSize(unknown2, 4, 5).
 
 % A small maze
 maze(small, 1, 1, open).
@@ -106,7 +107,7 @@ maze(unsolvable, 4, 2, open).
 maze(unsolvable, 4, 3, open).
 maze(unsolvable, 4, 4, open).
 
-% An unknnown maze
+% An unknown maze
 maze(unknown, 1, 1, open).
 maze(unknown, 1, 2, barrier).
 maze(unknown, 1, 3, open).
@@ -127,3 +128,25 @@ maze(unknown, 4, 2, open).
 maze(unknown, 4, 3, open).
 maze(unknown, 4, 4, barrier).
 maze(unknown, 4, 5, open).
+
+% An unknown2 maze
+maze(unknown2, 1, 1, open).
+maze(unknown2, 1, 2, open).
+maze(unknown2, 1, 3, open).
+maze(unknown2, 1, 4, open).
+maze(unknown2, 1, 5, open).
+maze(unknown2, 2, 1, open).
+maze(unknown2, 2, 2, barrier).
+maze(unknown2, 2, 3, open).
+maze(unknown2, 2, 4, barrier).
+maze(unknown2, 2, 5, open).
+maze(unknown2, 3, 1, open).
+maze(unknown2, 3, 2, open).
+maze(unknown2, 3, 3, barrier).
+maze(unknown2, 3, 4, open).
+maze(unknown2, 3, 5, barrier).
+maze(unknown2, 4, 1, barrier).
+maze(unknown2, 4, 2, open).
+maze(unknown2, 4, 3, open).
+maze(unknown2, 4, 4, open).
+maze(unknown2, 4, 5, open).

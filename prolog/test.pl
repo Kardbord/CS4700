@@ -3,11 +3,17 @@
 % Load the solve.pl file
 ?- consult(solve).
 
-% Should print the small maze
-?- printMaze(small, []).
-
-% Should print the small maze
-%?- printList([]).
-
 % Solve the small maze
-%?- solve(small).
+?- solve(small).
+
+% Solve the nobarrier maze
+?- solve(nobarrier).
+
+% Try to solve the unsolvable maze
+?- solve(unsolvable).
+
+% Solve the unknown maze
+?- solve(unknown).
+
+% Solve the second unknown maze
+?- solve(unknown2).
