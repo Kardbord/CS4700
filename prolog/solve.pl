@@ -7,6 +7,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % -------------------------- Movement Rules -------------------------- %
+move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
+    maze(Maze, Row, Column, open),
+    \+ isInList([Row, Column], List),
+    Row is GoalRow,
+    Column is GoalColumn,
+    append(List, [[Row, Column]], SolnList).
 
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
@@ -15,12 +21,6 @@ move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :-
     Up is Row + 1,
     move(Maze, Result, SolnList, Up, Column, GoalRow, GoalColumn).
 
-move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
-    maze(Maze, Row, Column, open),
-    \+ isInList([Row, Column], List),
-    append(List, [[Row, Column]], Result),
-    Down is Row - 1,
-    move(Maze, Result, SolnList, Down, Column, GoalRow, GoalColumn).
 
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
@@ -33,15 +33,15 @@ move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :-
     maze(Maze, Row, Column, open),
     \+ isInList([Row, Column], List),
     append(List, [[Row, Column]], Result),
-    Left is Column - 1,
-    move(Maze, Result, SolnList, Row, Left, GoalRow, GoalColumn).
+    Down is Row - 1,
+    move(Maze, Result, SolnList, Down, Column, GoalRow, GoalColumn).
 
 move(Maze, List, SolnList, Row, Column, GoalRow, GoalColumn) :- 
     maze(Maze, Row, Column, open),
     \+ isInList([Row, Column], List),
-    Row is GoalRow,
-    Column is GoalColumn,
-    append(List, [[Row, Column]], SolnList).
+    append(List, [[Row, Column]], Result),
+    Left is Column - 1,
+    move(Maze, Result, SolnList, Row, Left, GoalRow, GoalColumn).
 
 % -------------------------- Solving Rules --------------------------- %
 
