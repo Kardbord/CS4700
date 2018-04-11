@@ -61,6 +61,11 @@ fun countingNumbers(n : Int?) : List<Int>? {
     return list
 }
 
+// Provides a list of the even numbers in the range 1 to @n
+// E.g. evenNumbers(6) returns [2,4,6]
+//
+// param n : top end of range of even numbers returned
+// return  : a list of the even numbers in the range 1 to @n
 fun evenNumbers(n : Int?) : List<Int>? {
     if (n == null) return null
     if (n <= 0) return listOf<Int>()
