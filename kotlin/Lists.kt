@@ -39,6 +39,7 @@ get() = first()
  *      false if x is not a prime
  */
 fun isPrime(x : Int) : Boolean {
+    if (x == 1) return false
     for (i in 2..(x-1)) {
         if (x % i == 0) {
             return false
@@ -70,6 +71,17 @@ fun evenNumbers(n : Int?) : List<Int>? {
     if (n == null) return null
     if (n <= 0) return listOf<Int>()
     return countingNumbers(n)?.filter { it % 2 == 0 }
+}
+
+// Provides a list of the prime numbers in the range 1 to @n
+// E.g. primeNumbers(20) returns [2, 3, 5, 7, 11, 13, 17, 19]
+//
+// param n : top end of the range of prime numbers returned
+// return  : a list of the prime numbers in the range 1 to @n
+fun primeNumbers(n : Int?) : List<Int>? {
+    if (n == null) return null
+    if (n <= 0) return listOf<Int>()
+    return countingNumbers(n)?.filter { isPrime(it) }
 }
 
 /* The compose function takes as input
