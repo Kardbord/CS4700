@@ -94,10 +94,8 @@ fun<T : Comparable<T>> merge(a : List<T>?, b : List<T>?) : List<T>? {
             a1.head > b1.head  -> { result?.add(b1.head) ; b1.removeAt(0) }
         }
     }
-    while (a1.isEmpty() == false || b1.isEmpty() == false) {
-        if (b1.isEmpty() == true) { result?.add(a1.head) ; a1.removeAt(0) }
-        else { result?.add(b1.head) ; b1.removeAt(0) }
-    }
+    result?.addAll(a1)
+    result?.addAll(b1)
     return result
 }
 
