@@ -47,18 +47,24 @@ fun isPrime(x : Int) : Boolean {
     return true
 }
 
-
-fun countingNumbers(limit : Int?) : List<Int>? {
-    when (limit) {
-        null -> return null
-        else -> {
-            var list : MutableList<Int>? = mutableListOf<Int>()
-            for (i in 1..limit) {
-                list?.add(i)
-            }
-            return list
-        }
+// Provides a list of whole numbers from 1 to @n
+//
+// param n : how many numbers to include in the returned List
+// return  : a list of whole numbers from 1 to @n
+fun countingNumbers(n : Int?) : List<Int>? {
+    if (n == null) return null
+    if (n <= 0) return listOf<Int>()
+    var list : MutableList<Int>? = mutableListOf<Int>()
+    for (i in 1..n) {
+        list?.add(i)
     }
+    return list
+}
+
+fun evenNumbers(n : Int?) : List<Int>? {
+    if (n == null) return null
+    if (n <= 0) return listOf<Int>()
+    return countingNumbers(n)?.filter { it % 2 == 0 }
 }
 
 /* The compose function takes as input
