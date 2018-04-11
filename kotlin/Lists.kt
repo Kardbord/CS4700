@@ -54,7 +54,7 @@ fun countingNumbers(limit : Int?) : List<Int>? {
         else -> {
             var list : MutableList<Int>? = mutableListOf<Int>()
             for (i in 1..limit) {
-                list!!.add(i)
+                list?.add(i)
             }
             return list
         }
