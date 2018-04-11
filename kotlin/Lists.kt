@@ -52,7 +52,7 @@ fun isPrime(x : Int) : Boolean {
 fun countingNumbers(n : Int?) : List<Int>? {
     if (n == null) return null
     if (n <= 0) return listOf<Int>()
-    var list : MutableList<Int>? = mutableListOf<Int>()
+    val list : MutableList<Int>? = mutableListOf<Int>()
     for (i in 1..n) {
         list?.add(i)
     }
@@ -79,6 +79,26 @@ fun primeNumbers(n : Int?) : List<Int>? {
     if (n == null) return null
     if (n <= 0) return listOf<Int>()
     return countingNumbers(n)?.filter { isPrime(it) }
+}
+
+fun<T : Comparable<T>> merge(a : List<T>?, b : List<T>?) : List<T>? {
+    if (a == null || b == null) return null
+    if (a == null) return b
+    if (b == null) return a
+    val a1 : MutableList<T> = a.toMutableList()
+    val b1 : MutableList<T> = b.toMutableList()
+    val result : MutableList<T>? = mutableListOf<T>()
+    while (a1.isEmpty() == false && b1.isEmpty() == false) {
+        when {
+            a1.head <= b1.head -> { result?.add(a1.head) ; a1.removeAt(0) }
+            a1.head > b1.head  -> { result?.add(b1.head) ; b1.removeAt(0) }
+        }
+    }
+    while (a1.isEmpty() == false || b1.isEmpty() == false) {
+        if (b1.isEmpty() == true) { result?.add(a1.head) ; a1.removeAt(0) }
+        else { result?.add(b1.head) ; b1.removeAt(0) }
+    }
+    return result
 }
 
 // The compose function takes as input
