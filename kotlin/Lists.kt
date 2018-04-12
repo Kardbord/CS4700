@@ -81,6 +81,13 @@ fun primeNumbers(n : Int?) : List<Int>? {
     return countingNumbers(n)?.filter { isPrime(it) }
 }
 
+// Merges two already-sorted lists together into one sorted list
+// E.g. merge(listOf(1,2,3),listOf(1,7)) returns [1,1,2,3,7]
+// Returns null if either list is null
+//
+// param a : a sorted list
+// param b : a sorted list
+// return  : @a and @b merged into one sorted list, or null if @a or @b is null
 fun<T : Comparable<T>> merge(a : List<T>?, b : List<T>?) : List<T>? {
     if (a == null || b == null) return null
     if (a == null) return b
