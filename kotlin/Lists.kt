@@ -110,9 +110,10 @@ fun<T : Comparable<T>> merge(a : List<T>?, b : List<T>?) : List<T>? {
 // from 1 to n in the original list
 // 
 // Examples:
-// countElements(subLists(listOf(1,2,3)))    returns 6
-// countElements(listOf(listOf(1,2,3),null)) returns 3
-// countElements(null)                       returns 0
+// subLists(listOf(1,2,3)) returns the list [[1],[1,2],[1,2,3]]
+// subLists(listOf(3,0))   returns the list [[3],[3,0]]
+// subLists(listOf())      returns the list []
+// subLists(null)          returns null
 //
 // param a : a list
 // return  : a list of sub-lists, where the n-th sub-list is a list of elements
