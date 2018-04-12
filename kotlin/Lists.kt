@@ -106,6 +106,16 @@ fun<T : Comparable<T>> merge(a : List<T>?, b : List<T>?) : List<T>? {
     return result
 }
 
+fun<T> subLists(a : List<T>?) : List<List<T>>? {
+    if (a == null) return null
+    if (a.isEmpty()) return listOf<List<T>>()
+    val result : MutableList<List<T>> = mutableListOf<List<T>>()
+    for (i in 1..a.size) {
+        result.addAll(listOf(a.subList(0, i)))
+    }
+    return result
+}
+
 // The compose function takes as input
 //     f - A function that takes as input a value of type T and returns a value of type T
 //     g - A function that takes as input a value of type T and returns a value of type T
