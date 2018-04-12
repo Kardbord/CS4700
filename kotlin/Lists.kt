@@ -132,6 +132,19 @@ fun<T> subLists(a : List<T>?) : List<List<T>>? {
     return result
 }
 
+fun<T> countElements(a : List<List<T>?>?) : Int? {
+    if (a == null) return null
+    var result : Int = 0
+    for (i in a) {
+        if (i != null) {
+            for (j in i) {
+                if (j != null) ++result
+            }
+        }
+    }
+    return result
+}
+
 // The compose function takes as input
 //     f - A function that takes as input a value of type T and returns a value of type T
 //     g - A function that takes as input a value of type T and returns a value of type T
