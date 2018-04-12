@@ -45,6 +45,10 @@ fun isPrime(x : Int) : Boolean {
     return true
 }
 
+/*
+ * End of provided helper functions
+ */
+
 // Provides a list of whole numbers from 1 to @n
 //
 // param n : how many numbers to include in the returned List
