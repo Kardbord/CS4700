@@ -132,6 +132,15 @@ fun<T> subLists(a : List<T>?) : List<List<T>>? {
     return result
 }
 
+// Counts the total number of elements in a list of lists
+//
+// Examples:
+// countElements(subLists(listOf(1,2,3)))    returns 6
+// countElements(listOf(listOf(1,2,3),null)) returns 3
+// countElements(null)                       returns 0
+//
+// param a : a list of lists
+// return  : the sum total of elements in each list in @a
 fun<T> countElements(a : List<List<T>?>?) : Int? {
     if (a == null) return null
     var result : Int = 0
