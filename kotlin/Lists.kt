@@ -154,6 +154,22 @@ fun<T> countElements(a : List<List<T>?>?) : Int? {
     return result
 }
 
+fun<T : Any> listApply(f : (T, T) -> T, a : List<List<T>>?) : List<T>? {
+    if (a == null) return null
+    val result : MutableList<T> = mutableListOf()
+    for (i in a) {
+        if (i.size == 1) result.add(i.head)
+        else if (i.size != 0) {
+            val apply : T = f(i.get(i.size - 1), i.get(i.size - 2))
+            val temp : MutableList<T> = i.dropLast(2).toMutableList()
+            temp.add(apply)
+            val recurse : List<T>? = listApply(f, listOf(temp))
+            if (recurse != null) result.addAll(recurse)
+        }
+    }
+    return result
+}
+
 // The compose function takes as input
 //     f - A function that takes as input a value of type T and returns a value of type T
 //     g - A function that takes as input a value of type T and returns a value of type T
