@@ -100,9 +100,7 @@ fun primeNumbers(n : Int?) : List<Int>? {
 // param b : a sorted list
 // return  : @a and @b merged into one sorted list, or null if @a or @b is null
 fun<T : Comparable<T>> merge(a : List<T>?, b : List<T>?) : List<T>? {
-    if (a == null && b == null) return null
-    if (a == null) return b
-    if (b == null) return a
+    if (a == null || b == null) return null
     val a1 : MutableList<T> = a.toMutableList()
     val b1 : MutableList<T> = b.toMutableList()
     val result : MutableList<T>? = mutableListOf<T>()
