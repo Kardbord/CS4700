@@ -11,4 +11,4 @@
     1. `java -jar <name>.jar`
 
 ## Windows and Mac
-1. [Kotlin](https://kotlinlang.org/)
+1. [Kotlin](https://kotlinlang.org/).
