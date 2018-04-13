@@ -184,6 +184,16 @@ fun<T : Any> listApply(f : (T, T) -> T, a : List<List<T>>?) : List<T>? {
     return result
 }
 
+// Builds a function that is the composition of the unary functions in a list
+//
+// Example:
+//     fun add1(x : Int) : Int = x + 1
+//     fun add2(x : Int) : Int = x + 2
+//     val f = composeLis(listOf(::add1,::add2))
+//     f(4) returns 7
+//
+// param a : a list of unary functions
+// return  : a function composed of all of the functions in @a
 fun<T : Any> composeList(a : List<(T) -> T>) : (T) -> T {
    if (a.size == 1) return a.head
    val f = compose(a.head, a.get(1))
