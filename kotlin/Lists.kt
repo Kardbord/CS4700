@@ -45,6 +45,13 @@ fun isPrime(x : Int) : Boolean {
     return true
 }
 
+// The compose function takes as input
+//     f - A function that takes as input a value of type T and returns a value of type T
+//     g - A function that takes as input a value of type T and returns a value of type T
+//  and returns as output the composition of the functions
+//     f(g(x))
+fun<T> compose(f: (T)->T,  g:(T) -> T) : (T) -> T = { f(g(it)) }
+
 /*
  * End of provided helper functions
  */
@@ -177,10 +184,10 @@ fun<T : Any> listApply(f : (T, T) -> T, a : List<List<T>>?) : List<T>? {
     return result
 }
 
-// The compose function takes as input
-//     f - A function that takes as input a value of type T and returns a value of type T
-//     g - A function that takes as input a value of type T and returns a value of type T
-//  and returns as output the composition of the functions
-//     f(g(x))
-fun<T> compose(f: (T)->T,  g:(T) -> T) : (T) -> T = { f(g(it)) }
-
+fun<T : Any> composeList(a : List<(T) -> T>) : (T) -> T {
+   if (a.size == 1) return a.head
+   val f = compose(a.head, a.get(1))
+   val funList = mutableListOf(f)
+   funList.addAll(a.drop(2).toMutableList())
+   return composeList(funList)
+}
