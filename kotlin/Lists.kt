@@ -100,7 +100,7 @@ fun primeNumbers(n : Int?) : List<Int>? {
 // param b : a sorted list
 // return  : @a and @b merged into one sorted list, or null if @a or @b is null
 fun<T : Comparable<T>> merge(a : List<T>?, b : List<T>?) : List<T>? {
-    if (a == null || b == null) return null
+    if (a == null && b == null) return null
     if (a == null) return b
     if (b == null) return a
     val a1 : MutableList<T> = a.toMutableList()
@@ -189,7 +189,7 @@ fun<T : Any> listApply(f : (T, T) -> T, a : List<List<T>>?) : List<T>? {
 // Example:
 //     fun add1(x : Int) : Int = x + 1
 //     fun add2(x : Int) : Int = x + 2
-//     val f = composeLis(listOf(::add1,::add2))
+//     val f = composeList(listOf(::add1,::add2))
 //     f(4) returns 7
 //
 // param a : a list of unary functions
