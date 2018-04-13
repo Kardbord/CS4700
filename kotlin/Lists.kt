@@ -154,6 +154,13 @@ fun<T> countElements(a : List<List<T>?>?) : Int? {
     return result
 }
 
+// Applies a binary function to the elements in a list of lists and returns a list with the results
+// 
+// Example: listApply(f,[[x1, x2, x3] [y1, y2], [w1]]) returns [f(x1, f(x2, x3)), f(y1, y2), w1]
+//
+// param f : a binary function that takes two parameters of type <T : Any> and returns a type <T : Any>
+// param a : a list of lists of objects of type <T : Any>
+// return  : a list of results
 fun<T : Any> listApply(f : (T, T) -> T, a : List<List<T>>?) : List<T>? {
     if (a == null) return null
     val result : MutableList<T> = mutableListOf()
